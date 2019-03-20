@@ -25,6 +25,8 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -217,7 +219,15 @@ public class MainActivity extends AppCompatActivity {
         textViewLongitude.setText(Double.toString(currentLocation.getLongitude()));
 
         MqttMessage message = new MqttMessage();
-        message.setPayload((location.getLatitude() + "," + location.getLongitude()).getBytes());
+        JSONObject object = new JSONObject();
+        try {
+            object.put("latitude", location.getLatitude());
+            object.put("longitude", location.getLongitude());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        message.setPayload(object.toString().getBytes());
 
 
         if (mqttAndroidClient.isConnected()) {
