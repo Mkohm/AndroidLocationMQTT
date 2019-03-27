@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    TextView textViewTime;
     TextView textViewLatitude;
     TextView textViewLongitude;
 
@@ -49,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Setup UI References
-        textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
         textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
 
@@ -214,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdatePosition(Location location) {
         currentLocation = location;
-        textViewTime.setText(new SimpleDateFormat("HH.mm.ss").format(new Date()));
         textViewLatitude.setText(Double.toString(currentLocation.getLatitude()));
         textViewLongitude.setText(Double.toString(currentLocation.getLongitude()));
 
